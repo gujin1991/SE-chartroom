@@ -16,7 +16,7 @@ return ;
 alert("请输入密码");
 return;
 }
-       else  if((pass.value=="123456")&&(username.value=="W"))
+       else  if((username.value!=null))
 {
     frm.submit();
 
@@ -31,7 +31,7 @@ return true;
 </script>
 </head>
 <body>
-<form name="frm" action="index.html" method="post">
+<form name="frm" action="index.html?name=jin"method="post">
     <table  >
                      <tr align=center>
 <td>username:</td><td><input type="text" name="username"  id="username"></td>

@@ -2,14 +2,26 @@
 <html>
 <head>
 	<meta charset='utf-8'>
-    <title>Chart Room</title>
+    <title>Chat Room</title>
     <script src = "jquery.js"></script>
     <script src = "/socket.io/socket.io.js"></script>
     <script src = "main.js"></script>
 </head>
 <body>
-    <h1>Chart Room</h1>
-    <input id = 'name' placeholder="username"><input type="text" id="input" onkeydown="if(event.keyCode==13){document.getElementById('button').click();return false;}" /><button id="button">Send messages</button>
+    <h1>Chat Room</h1>
+    <div id = 'dname'>
+    	<p>Login and join us!</p>
+    	<input id = 'name' placeholder="username" onkeydown="if(event.keyCode==13){document.getElementById('login').click();return false;}"></input>
+    	<button id="login">Login</button>
+	</div>
+	<div id='dinput'>
+		<p id = 'curuser'>Current user: </p>
+	    <input type="text" id="input" onkeydown="if(event.keyCode==13){document.getElementById('button').click();return false;}"></input><br>
+	    <button id="button">Send messages</button>
+	</div>
+
+	<div id='content'>
+	</div>
     
 </body>
 </html>
