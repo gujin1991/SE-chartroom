@@ -21,22 +21,7 @@ server.listen(4000);
 io.sockets.on('connection', function (socket) {
     var name;
     
-    /*db.open(function (err,db) {
-	    db.collection("info", function (err,collection) {
-	        if(err) throw err;
-	        else{
-	            collection.find().sort({ _id : -1 }).limit(10).toArray(function(err,docs){
-	                if(err) throw  err;
-	                else{
-	                    console.log(docs);
-	                    socket.emit('chatmsg', docs);	
-	                    db.close();
-	                }
-	            });
-	        }
-	    });
-	});*/
-
+    
 		
 
     socket.on('message', function(data) {
