@@ -11,11 +11,12 @@
     <h1>Chat Room</h1>
     <div id = 'dname'>
     	<p>Login and join us!</p>
-    	<input id = 'name' placeholder="username" onkeydown="if(event.keyCode==13){document.getElementById('login').click();return false;}"></input>
+    	<input id = 'name' placeholder="nickname" onkeydown="if(event.keyCode==13){document.getElementById('login').click();return false;}"></input>
     	<button id="login">Login</button>
 	</div>
 	<div id='dinput'>
-		<p id = 'curuser'>Current user: </p>
+		<p id = 'userNum'>Online user number: </p>
+		<p id = 'curuser'>Your nickname: </p>
 	    <input type="text" id="input" onkeydown="if(event.keyCode==13){document.getElementById('button').click();return false;}"></input><br>
 	    <button id="button">Send messages</button>
 	</div>

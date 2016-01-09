@@ -17,10 +17,12 @@ var server = http.createServer(app);
 io = io.listen(server);
 
 server.listen(4000);
+console.log("The server is listening on 127.0.0.1:4000.");
+
 
 io.sockets.on('connection', function (socket) {
-    var name;
-    
+	    var name;
+    var userNum;
     
 		
 
@@ -47,7 +49,11 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('disconnect', function() {
-		socket.broadcast.emit('offline', name);
+		userNum = curUser.length - 1;	
+		socket.broadcast.emit('offline', {
+				name: name,
+				num: userNum
+		});
 		curUser.splice(curUser.indexOf(name), 1);
 		
 	});
@@ -57,8 +63,16 @@ io.sockets.on('connection', function (socket) {
 		if(curUser.indexOf(data) == -1) {
 			name = data;
 			curUser.push(data);
-			socket.emit('isExisted', 'No');	
-			socket.broadcast.emit('online', name);
+			userNum = curUser.length;
+			socket.emit('isExisted', {
+				sign: 'No',
+				num: userNum
+			});
+				
+			socket.broadcast.emit('online', {
+				name: name,
+				num: userNum
+			});
 				
 			db.open(function (err,db) {
 			    db.collection("chatmessage", function (err,collection) {
@@ -67,7 +81,7 @@ io.sockets.on('connection', function (socket) {
 			            collection.find().sort({ _id : -1 }).limit(10).toArray(function(err,docs){
 			                if(err) throw  err;
 			                else{
-			                    console.log(docs);
+			                    //console.log(docs);
 			                    socket.emit('chatmsg', docs);	
 			                    db.close();
 			                }

@@ -35,11 +35,12 @@ $(function() {
 
 	socket.on('isExisted', function(data) {
 		//console.log('boardcast: ' + data);
-		if(data == 'No') {
+		if(data.sign == 'No') {
 			myname = $('#name').val();
 			$('#dinput').show();
 			$('#dname').hide();	
-			$('#curuser').append($('#name').val());	
+			$('#curuser').append($('#name').val());
+			$('#userNum').append(data.num);		
 		}else {
 			alert("This username had been used, please take another one.");
 		}
@@ -62,16 +63,22 @@ $(function() {
 		$('#content').prepend('<p>' + data.name + ': ' + data.message + ' ' + data.date + '</p>');
 	});
 
-	socket.on('online', function(name) {
+	socket.on('online', function(data) {
 		//console.log('boardcast: ' + data);
-		if(myname != null)
-		$('#content').prepend('<p>' + name + ' connected.</p>');
+		if(myname != null) {
+			$('#userNum').replaceWith("<p id = \'userNum\'>Online user number:" + data.num + "</p>");
+			$('#content').prepend('<p>' + data.name + ' connected.</p>');
+
+		}
 	});
 
-	socket.on('offline', function(name) {
+	socket.on('offline', function(data) {
 		//console.log('boardcast: ' + data);
-		if(myname != null && name != null)
-			$('#content').prepend('<p>' + name + ' disconnected.</p>');
+		if(myname != null && name != null) {
+			$('#userNum').replaceWith("<p id = \'userNum\'>Online user number:" + data.num + "</p>");
+			$('#content').prepend('<p>' + data.name + ' disconnected.</p>');	
+		}
+			
 	});
 	
 });
