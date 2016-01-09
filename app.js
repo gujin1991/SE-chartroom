@@ -2,6 +2,12 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var io = require('socket.io');
+var mongo = require('mongodb');
+var host = "localhost";
+var dbport = 27017;
+var dbserver = new mongo.Server(host,dbport,{auto_reconnect:true});
+var db = new mongo.Db("chatroom",dbserver,{safe:true});
+var curUser = new Array();
 
 var app = express();
 //app.set('port', process.env.PORT || 3000); 
@@ -14,17 +20,93 @@ server.listen(4000);
 
 io.sockets.on('connection', function (socket) {
     var name;
+    
+    /*db.open(function (err,db) {
+	    db.collection("info", function (err,collection) {
+	        if(err) throw err;
+	        else{
+	            collection.find().sort({ _id : -1 }).limit(10).toArray(function(err,docs){
+	                if(err) throw  err;
+	                else{
+	                    console.log(docs);
+	                    socket.emit('chatmsg', docs);	
+	                    db.close();
+	                }
+	            });
+	        }
+	    });
+	});*/
+
+		
+
     socket.on('message', function(data) {
-		name = data.name;
+    	
+    	//console.log(curUser);
+    	
+		db.open(function (err,db) {//连接数据库
+		     if(err)
+		         throw err;
+		     else{
+		     	//console.log(Date().toString().slice(4, 25));
+		         db.collection("chatmessage", function (err,collection) {
+
+		            collection.insert({username:name,msg:data.message,time:data.date}, function (err,docs) {
+		                 //console.log(docs);
+		                db.close();
+		            });
+		         });        
+		     }
+		 });
+		
 		socket.broadcast.emit('message',data);
 	});
 
 	socket.on('disconnect', function() {
 		socket.broadcast.emit('offline', name);
+		curUser.splice(curUser.indexOf(name), 1);
+		
 	});
 
-	socket.broadcast.emit('online', name);	
+	socket.on('searchname', function(data) {
+		//console.log(curUser);
+		if(curUser.indexOf(data) == -1) {
+			name = data;
+			curUser.push(data);
+			socket.emit('isExisted', 'No');	
+			socket.broadcast.emit('online', name);
+				
+			db.open(function (err,db) {
+			    db.collection("chatmessage", function (err,collection) {
+			        if(err) throw err;
+			        else{
+			            collection.find().sort({ _id : -1 }).limit(10).toArray(function(err,docs){
+			                if(err) throw  err;
+			                else{
+			                    console.log(docs);
+			                    socket.emit('chatmsg', docs);	
+			                    db.close();
+			                }
+			            });
+			        }
+			    });
+			});
+
+
+		} else {
+			socket.emit('isExisted', 'Yes');
+
+		}
+		
+	});
+
+
+
+	
 	
 	
 
 });
+
+
+
+
