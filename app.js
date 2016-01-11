@@ -21,7 +21,7 @@ console.log("The server is listening on 127.0.0.1:4000.");
 
 
 io.sockets.on('connection', function (socket) {
-	    var name;
+	var name;
     var userNum;
     
 		
@@ -55,6 +55,16 @@ io.sockets.on('connection', function (socket) {
 				num: userNum
 		});
 		curUser.splice(curUser.indexOf(name), 1);
+		
+	});
+
+	socket.on('logout', function(myname) {
+		userNum = curUser.length - 1;	
+		socket.broadcast.emit('offline', {
+				name: myname,
+				num: userNum
+		});
+		curUser.splice(curUser.indexOf(myname), 1);
 		
 	});
 

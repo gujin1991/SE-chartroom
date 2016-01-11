@@ -12,8 +12,6 @@ $(function() {
 	$('#button').click(function () {
 		
 		var message  = $('#input').val();
-		var name = $('#name').val();
-		//myname = name;
 		var cdate = Date().toString().slice(4, 25)
 		//console.log(message);
 		//$('#content').prepend('<p style=\'background-color:honeydew;font-size:large;text-align:right;border:3px solid #000;word-wrap:break-word;word-break:break-all;overflow: auto;width:750px; height:60px;margin-left: auto; margin-right: auto\'>'+ message + '</p>');
@@ -22,7 +20,7 @@ $(function() {
 
 
 			socket.emit('message', {
-				name: name,
+				name: myname,
 				message: message,
 				date: cdate
 			});	
@@ -35,10 +33,11 @@ $(function() {
 		//console.log('boardcast: ' + data);
 		if(data.sign == 'No') {
 			myname = $('#name').val();
+			$('#name').val('');
 			$('#dinput').show();
 			$('#content').show();
 			$('#dname').hide();	
-			$('#curuser').append($('#name').val());
+			$('#curuser').append(myname);
 			$('#userNum').append(data.num);		
 		}else {
 			alert("This username had been used, please take another one.");

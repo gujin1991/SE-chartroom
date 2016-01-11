@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 	<meta charset='utf-8'>
     <title>Chat Room</title>
@@ -9,21 +9,27 @@
     <script src = "bootstrap.js"></script>
     <link rel="stylesheet" type="text/css" href="bootstrap.css">
 </head>
-<body>
+<body style="background-color:yellow; background-image:url(scenery.jpeg);background-size:cover;background-repeat:no-repeat">
     <h1 style="text-align:center">FSE Chat Room</h1>
+    
     <div id = 'dname' style="text-align:center">
-    	<p>Login and join us!</p>
+    	<p style="color:yellow">Login and join us!</p>
     	<input id = 'name' placeholder="nickname" onkeydown="if(event.keyCode==13){document.getElementById('login').click();return false;}"></input>
     	<button id="login">Login</button>
-	</div>
+    </div>
+
+    
+
 	<div id='dinput' style='text-align:center'>
-		<p id = 'userNum' style="font-size:small">Online user number:</p>
-		<p id = 'curuser'style="font-size:small">Your nickname: </p>
-	    <input type="text" id="input" placeholder="Say something here." onkeydown="if(event.keyCode==13){document.getElementById('button').click();return false;}" style = 'width:600px'></input>
+		<p id = 'userNum' style="font-size:small;color:yellow">Online user number:</p>
+		<p id = 'curuser'style="font-size:small;color:yellow">Your nickname: </p>
+        <input type=button value="Log Out" onclick="location.reload()" style="background-color:red">   <input type="text" id="input" placeholder="Say something here." onkeydown="if(event.keyCode==13){document.getElementById('button').click();return false;}" style = 'width:600px'></input>
 	    <button style= "background-color:royalblue; width:120px" id="button">Send messages</button>
 	</div>
-	<div id='content' style='border:3px solid #000;word-wrap:break-word;word-break:break-all;overflow: auto;width:750px; height:600px;margin-left: auto; margin-right: auto'>
+	<div id='content' style='border:3px solid #000;word-wrap:break-word;word-break:break-all;overflow:auto;width:790px; height:600px;margin-left: auto; margin-right: auto;background-color:lightcyan'>
 	</div>
+
+
     
 </body>
 </html>
