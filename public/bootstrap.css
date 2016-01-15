@@ -266,6 +266,39 @@ th {
   src: url('../fonts/glyphicons-halflings-regular.eot');
   src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
+
+.form-signin{
+
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.mydate{
+  width: 800px;
+  height: 15px;
+  margin: auto;
+  font-size: small;
+}
+
+.mymsg{
+  width: 800px;
+  height: 100px;
+  margin: auto;
+  font-size: large;
+  text-align: right;
+  overflow: auto;
+}
+
+.othermsg{
+  width: 800px;
+  height: 100px;
+  margin: auto;
+  font-size: large;
+  text-align: left;
+  overflow: auto;
+}
+
 .glyphicon {
   position: relative;
   top: 1px;
@@ -2550,7 +2583,8 @@ output {
 }
 .form-control {
   display: block;
-  width: 100%;
+  margin: auto;
+  width: 300px;
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;
@@ -3457,7 +3491,8 @@ fieldset[disabled] .btn-link:focus {
 }
 .btn-block {
   display: block;
-  width: 100%;
+  margin: auto;
+  width: 300px;
 }
 .btn-block + .btn-block {
   margin-top: 5px;

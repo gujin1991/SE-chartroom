@@ -15,8 +15,8 @@ $(function() {
 		var cdate = Date().toString().slice(4, 25)
 		//console.log(message);
 		//$('#content').prepend('<p style=\'background-color:honeydew;font-size:large;text-align:right;border:3px solid #000;word-wrap:break-word;word-break:break-all;overflow: auto;width:750px; height:60px;margin-left: auto; margin-right: auto\'>'+ message + '</p>');
-		$('#content').prepend('<p style=\'font-size:large; text-align:right\'>' + message + '</p>');
-		$('#content').prepend('<p style=\'font-size:small; text-align:right\'>' + cdate + '</p>');
+		$('#content').prepend('<p class="bg-primary mymsg">' + message + '</p>');
+		$('#content').prepend('<p class="mydate" style=\'text-align:right\'>' + cdate + '</p>');
 
 
 			socket.emit('message', {
@@ -51,11 +51,11 @@ $(function() {
 		//console.log('boardcast: ' + data);
 		for(var i = 0; i < 10; i++) {
 			if(data[i].username == myname) {
-				$('#content').append('<p style=\'text-align:right;font-size:small\'>' + data[i].time + '</p>');
-				$('#content').append('<p style=\'text-align:right;font-size:large\'>' + data[i].msg + '</p>');	
+				$('#content').append('<p style=\'text-align:right\' class="mydate">' + data[i].time + '</p>');
+				$('#content').append('<p class="bg-primary mymsg">' + data[i].msg + '</p>');	
 			} else {
-				$('#content').append('<p style=\'text-align:left;font-size:small\'>' + data[i].time + '</p>');
-				$('#content').append('<p style=\'text-align:left;font-size:large\'>' + data[i].username + ': ' + data[i].msg + '</p>');	
+				$('#content').append('<p style=\'text-align:left\' class="mydate">' + data[i].time + '</p>');
+				$('#content').append('<p class="bg-success othermsg">' + data[i].username + ': ' + data[i].msg + '</p>');	
 			}
 							
 		}
@@ -64,8 +64,8 @@ $(function() {
 	
 	socket.on('message', function(data) {
 		if(myname != null) {
-			$('#content').prepend('<p style=\'text-align:left;font-size:large\'>' + data.name + ': ' + data.message + '</p>');	
-			$('#content').prepend('<p style=\'text-align:left;font-size:small\'>' + data.date + '</p>');
+			$('#content').prepend('<p class="bg-success othermsg">' + data.name + ': ' + data.message + '</p>');	
+			$('#content').prepend('<p style=\'text-align:left\' class="mydate">' + data.date + '</p>');
 
 		}
 		
